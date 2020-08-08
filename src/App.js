@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, NavLink, Redirect } from 'react-router-dom'
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import '../node_modules/font-awesome/css/font-awesome.min.css'
 import {createGlobalStyle} from 'styled-components'
 import Home from './components/Home/index'
 import Perfil from './components/Perfil/index'
@@ -16,8 +17,11 @@ const GlobalStyle = createGlobalStyle`
 const Navigation = () =>{
   return(
     <nav>
-      <NavLink to='/' exact activeClassName='active'>Home</NavLink>
-      <NavLink to='/perfil' activeClassName='active'>Perfil</NavLink>
+      <a className="float">
+          <NavLink to='/perfil' activeClassName='active'>
+            <i className="fa fa-user my-float"></i>
+          </NavLink>
+        </a>
     </nav>
   )
 }
@@ -27,9 +31,9 @@ const App = () => {
     <div className="container">
       <GlobalStyle font="'Open Sans', sans-serif"/>
       <BrowserRouter>
-        <Navigation />
         <Route path='/' exact render={Home} />
         <Route path='/perfil' render={Perfil} />
+        <Navigation />
       </BrowserRouter>
     </div>
   );

@@ -26,7 +26,7 @@ nav a:hover{
 
 .logo{
   margin: 0 auto;
-  animation: anima infinite 20s linear;
+  /* animation: anima infinite 20s linear; */
 }
 
 .imagen{
@@ -90,6 +90,40 @@ form div p{
   font-weight: bold;
   border-radius: 40px;
 }
+
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:white;
+	color:gray;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.float a{
+  margin: auto;
+  text-decoration: none;
+  color: gray;
+}
+
+.float a:hover{
+  text-decoration: none;
+  color: gray;
+}
+
+.my-float{
+	margin-top:22px;
+}
+
+.float:hover {
+  width: 100px;
+}
+
+
 
 @media (max-width: 375px){
   form{
