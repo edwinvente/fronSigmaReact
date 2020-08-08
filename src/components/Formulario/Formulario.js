@@ -26,14 +26,17 @@ const Formulario = () => {
   }, [])
 
   const { register, handleSubmit, watch, errors } = useForm()
-  const onSubmit = data => handleSave(data)
+  const onSubmit = (data, e) => {
+    handleSave(data)
+    e.target.reset()
+  }
 
   const handleSave = (props) =>{
     axios.post(url+`user`, { json: JSON.stringify(props)})
             .then(res => {
                 console.log(res);
                 console.log(res.data);      
-                if(res.data.status){
+                if(res.data){
                   alert('Registro exitoso')
                 }
     }).catch(err => {
