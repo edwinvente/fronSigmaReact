@@ -116,6 +116,12 @@ form div p{
 }
 
 .my-float{
+  margin-top:22px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.my-float2{
 	margin-top:22px;
 }
 

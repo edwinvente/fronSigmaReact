@@ -17,6 +17,9 @@ const GlobalStyle = createGlobalStyle`
 const Navigation = () =>{
   return(
     <nav className='float'>
+      <NavLink to='/' activeClassName='active'>
+            <i className="fa fa-home my-float2"></i>
+      </NavLink>
       <NavLink to='/perfil' activeClassName='active'>
             <i className="fa fa-user my-float"></i>
       </NavLink>
