@@ -1,24 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Route, NavLink, Redirect } from 'react-router-dom'
 import './App.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import {createGlobalStyle} from 'styled-components'
+import Home from './components/Home/index'
+import Perfil from './components/Perfil/index'
 
-function App() {
+const GlobalStyle = createGlobalStyle`
+    body{
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+        font-family: ${props => props.font};
+    }
+`
+
+const Navigation = () =>{
+  return(
+    <nav>
+      <NavLink to='/' exact activeClassName='active'>Home</NavLink>
+      <NavLink to='/perfil' activeClassName='active'>Perfil</NavLink>
+    </nav>
+  )
+}
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <GlobalStyle font="'Open Sans', sans-serif"/>
+      <BrowserRouter>
+        <Navigation />
+        <Route path='/' exact render={Home} />
+        <Route path='/perfil' render={Perfil} />
+      </BrowserRouter>
     </div>
   );
 }
