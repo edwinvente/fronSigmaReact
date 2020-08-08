@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, NavLink, Redirect } from 'react-router-dom'
+import { BrowserRouter, Route, NavLink, Redirect, Switch } from 'react-router-dom'
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import '../node_modules/font-awesome/css/font-awesome.min.css'
@@ -29,8 +29,10 @@ const App = () => {
     <div className="container">
       <GlobalStyle font="'Open Sans', sans-serif"/>
       <BrowserRouter>
-        <Route path='/' exact render={Home} />
-        <Route path='/perfil' render={Perfil} />
+        <Switch>
+          <Route path='/' exact render={Home} />
+          <Route path='/perfil' render={Perfil} />
+        </Switch>
         <Navigation />
       </BrowserRouter>
     </div>

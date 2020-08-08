@@ -136,6 +136,20 @@ form div p{
     font-size: 18px;
     font-weight: 900;
   }
+
+  .float{
+    position:fixed;
+    width:60px;
+    height:60px;
+    bottom:7px;
+    right:20px;
+    background-color:white;
+    color:gray;
+    border-radius:50px;
+    text-align:center;
+    box-shadow: 2px 2px 3px #999;
+  }
+
 }
 
 @keyframes anima{

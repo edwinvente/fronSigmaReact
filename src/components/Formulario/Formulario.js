@@ -3,21 +3,26 @@ import { useForm } from "react-hook-form"
 import styled from 'styled-components'
 import axios from 'axios'
 
+const url = 'http://localhost:8000/api/'
+
 const Formulario = () => {
-  const url = 'http://localhost:8000/api/'
 
   const [data, setData] = useState({})
   const [deparments, setDeparments] = useState([])
   const [citys, setCity] = useState([])
-  const [isFetching, setFetch] = useState(false)
+  const [isFetching, setFetch] = useState(true)
+  
+  const { register, handleSubmit, watch, errors } = useForm()
 
   useEffect(() => {
     fetch(url+'test').
             then(res => res.json()).
             then(data => {
               setData(data)
-              console.log(data)
-              setFetch(true)
+              /* console.log(data.users) */
+              let deperatamentos =  (Object.keys(data.departaments).length) ? Object.keys(data.departaments) : []
+              setDeparments(deperatamentos)
+              setFetch(false)
             }).
             catch(err => {
                 console.log('Hay un error http');
@@ -25,7 +30,7 @@ const Formulario = () => {
 
   }, [])
 
-  const { register, handleSubmit, watch, errors } = useForm()
+  
   const onSubmit = (data, e) => {
     handleSave(data)
     e.target.reset()
@@ -44,19 +49,13 @@ const Formulario = () => {
     }) 
   }
 
-  const handleDeparments = () =>{
-      let keys = []
-      for (var k in data.departaments) keys.push(k);
-      setDeparments(keys)
-  }
-
   const handleTest = (e) => {
     let region = e.target.value
     setCity(data.departaments[region])
   }
 
-  if (!isFetching) {
-    return 'Esperando los datos del api...'
+  if (isFetching) {
+    return 'Esperando los datos del API...'
   }
 
   return (
@@ -64,9 +63,9 @@ const Formulario = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         {<div className='container'>
           <p>Departamento*</p>
-          <select ref={register({required:true})} name='department' className='form-control' onClick={handleDeparments} onChange={handleTest}>
+          <select ref={register({required:true})} name='department' className='form-control' onChange={handleTest}>
             <option>Selecciona tu departamento</option>
-            {!deparments ? null :  deparments.map((item, i) => (
+            {deparments.map((item, i) => (
               <option 
                 key={i}
                 value={item}
@@ -103,14 +102,16 @@ const Formulario = () => {
           {errors.name && <span>Por favor ingresa tu email</span>}
         </div>
         <div className='container'>
-          <button className='btn mt-4 text-center' >
+          <button type='submit' className='btn mt-4 text-center' >
             ENVIAR
           </button>
         </div>
       </form>
+      <div className='container mt-3'>
       {/* {!data.users ? null :  data.users.map((item, i) => (
         <li key={i}> { item.name} - { item.created_at} </li>
       ))} */}
+      </div>
     </div>
   )
 }
