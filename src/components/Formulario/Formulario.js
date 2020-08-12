@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useForm } from "react-hook-form"
 import styled from 'styled-components'
 import axios from 'axios'
+import { Redirect } from 'react-router-dom'
+import '../../App.css'
 
 const url = 'http://localhost:8000/api/'
 
@@ -11,6 +13,7 @@ const Formulario = () => {
   const [deparments, setDeparments] = useState([])
   const [citys, setCity] = useState([])
   const [isFetching, setFetch] = useState(true)
+  const [exit, setExit] = useState(true)
   
   const { register, handleSubmit, watch, errors } = useForm()
 
@@ -19,7 +22,6 @@ const Formulario = () => {
             then(res => res.json()).
             then(data => {
               setData(data)
-              /* console.log(data.users) */
               let deperatamentos =  (Object.keys(data.departaments).length) ? Object.keys(data.departaments) : []
               setDeparments(deperatamentos)
               setFetch(false)
@@ -31,8 +33,8 @@ const Formulario = () => {
   }, [])
 
   
-  const onSubmit = (data, e) => {
-    handleSave(data)
+  const onSubmit = async (data, e) => {
+    await handleSave(data)
     e.target.reset()
   }
 
@@ -42,7 +44,7 @@ const Formulario = () => {
                 console.log(res);
                 console.log(res.data);      
                 if(res.data){
-                  alert('Registro exitoso')
+                  setExit(false)
                 }
     }).catch(err => {
       console.log('error')
@@ -52,6 +54,12 @@ const Formulario = () => {
   const handleTest = (e) => {
     let region = e.target.value
     setCity(data.departaments[region])
+  }
+
+  if (!exit) {
+    return <Redirect to={{
+      pathname: '/usuarios',
+    }} />
   }
 
   if (isFetching) {

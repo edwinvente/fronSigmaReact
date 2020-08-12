@@ -1,11 +1,15 @@
 import React from 'react';
-import { BrowserRouter, Route, NavLink, Redirect, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import {createGlobalStyle} from 'styled-components'
+
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import '../node_modules/font-awesome/css/font-awesome.min.css'
-import {createGlobalStyle} from 'styled-components'
+
 import Home from './components/Home/index'
 import Perfil from './components/Perfil/index'
+import Navegacion from './components/Navegacion/index'
+import Usuarios from './components/Usuarios/index'
 
 const GlobalStyle = createGlobalStyle`
     body{
@@ -13,30 +17,17 @@ const GlobalStyle = createGlobalStyle`
         font-family: ${props => props.font};
     }
 `
-
-const Navigation = () =>{
-  return(
-    <nav className='float'>
-      <NavLink to='/' activeClassName='active'>
-            <i className="fa fa-home my-float2"></i>
-      </NavLink>
-      <NavLink to='/perfil' activeClassName='active'>
-            <i className="fa fa-user my-float"></i>
-      </NavLink>
-    </nav>
-  )
-}
-
 const App = () => {
   return (
     <div className="container">
       <GlobalStyle font="'Open Sans', sans-serif"/>
       <BrowserRouter>
         <Switch>
-          <Route path='/' exact render={Home} />
-          <Route path='/perfil' render={Perfil} />
+          <Route path='/' exact component={Home} />
+          <Route path='/perfil' component={Perfil} />
+          <Route path='/usuarios' component={Usuarios} />
         </Switch>
-        <Navigation />
+        <Navegacion />
       </BrowserRouter>
     </div>
   );
